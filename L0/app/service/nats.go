@@ -57,7 +57,7 @@ func (n *Nats) Connect(NATS_URL, clusterID, clientID string) (stan.Conn, error) 
 }
 
 func (n *Nats) Subscribe(nc stan.Conn, subject string, cb stan.MsgHandler) (stan.Subscription, error) {
-	sub, err := nc.Subscribe(subject, cb)
+	sub, err := nc.Subscribe(subject, cb, stan.DurableName(subject))
 
 	if err != nil {
 		return nil, err
